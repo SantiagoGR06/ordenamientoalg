@@ -1,3 +1,5 @@
+
+
 #include <iostream>
 #include <fstream> // Se utiliza para leer de archivos.
 #include <string> //  Proporciona las clases y funciones para manejar cadenas de caracteres en C++ de manera eficiente, como la clase string y sus operaciones.
@@ -5,7 +7,7 @@
 #include <vector> // Proporciona una implementación de contenedor de arreglo dinámico en C++. Los vectores son secuencias de elementos con tamaño variable y se pueden acceder de manera eficiente a través de índices.
 #include <algorithm> // Proporciona una serie de algoritmos genéricos que trabajan en secuencias de elementos, como ordenamiento, búsqueda y manipulación de secuencias.
 #include <climits> // Define constantes para límites de tipos de datos enteros en C++. Por ejemplo, INT_MAX y INT_MIN son los valores máximos y mínimos para un int, respectivamente
-#include <chrono>
+#include <ctime> // se utiliza para cronometrar el tiempo de ejecución de cada método
 
 using namespace std;
 // inicio de puntero para la lista
@@ -96,15 +98,11 @@ public:
 // no creo qeu hace falta explicar los codigos de ORDENAMIENTO ya que pues para eso fue las exposiciones 
 // selección
 void ordenarSeleccion() {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
+    clock_t start = clock(); // Inicia el temporizador
 
     Nodo *i, *j, *min;
     string temp;
-    int paso = 1; // Variable para mantener el número de pasos
-
-    cout << "Lista original:" << endl;
-    mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-    cout << endl;
+    int paso = 0; // Variable para mantener el número de pasos
 
     for (i = inicio; i != nullptr; i = i->siguiente) {
         min = i;
@@ -112,46 +110,35 @@ void ordenarSeleccion() {
             if (stoi(j->dato) < stoi(min->dato)) {
                 min = j;
             }
+            paso++; // Incrementa el número de pasos en cada comparación
         }
         if (min != i) {
             temp = i->dato;
             i->dato = min->dato;
             min->dato = temp;
-
-            // Imprime el estado actual de la lista después de intercambiar los elementos
-            cout << "Iteración " << paso++ << ":" << endl;
-            mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-            cout << endl;
-
-            // Pausa la ejecución para que el usuario pueda ver la lista
-            cout << "Presiona Enter para continuar..." << endl;
-            cin.ignore(); // Ignora la entrada del usuario (incluyendo Enter)
         }
     }
 
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
+    clock_t end = clock(); // Finaliza el temporizador
+    double duration = double(end - start) / CLOCKS_PER_SEC; // Calcula la duración en segundos
 
+    cout << "Iteraciones: " << paso << endl; // Imprime el número total de iteraciones
     cout << "Lista ordenada mediante el algoritmo de selección." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
+    cout << "El método de ordenamiento por selección se demoró " << duration << " segundos en ejecutar." << endl;
 }
 
 
     // bubbleSort
  void ordenarBubbleSort() {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
+    clock_t start = clock(); // Inicia el temporizador
 
     bool swapped;
     Nodo* ptr1;
     Nodo* lptr = nullptr;
-    int paso = 1; // Variable para mantener el número de pasos
+    int iteraciones = 0; // Variable para mantener el número total de iteraciones
 
     if (inicio == nullptr || inicio->siguiente == nullptr)
         return;
-
-    cout << "Lista original:" << endl;
-    mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-    cout << endl;
 
     do {
         swapped = false;
@@ -165,43 +152,32 @@ void ordenarSeleccion() {
                 swapped = true;
             }
             ptr1 = ptr1->siguiente;
+            iteraciones++; // Incrementa el número de iteraciones en cada comparación
         }
-
-        // Imprime el estado actual de la lista después de cada iteración
-        cout << "Iteración " << paso++ << ":" << endl;
-        mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-        cout << "Swapped: " << (swapped ? "true" : "false") << endl;
-        cout << endl;
-
-        // Pausa la ejecución para que el usuario pueda ver la lista
-        cout << "Presiona Enter para continuar..." << endl;
-        cin.ignore(); // Ignora la entrada del usuario (incluyendo Enter)
 
         lptr = ptr1;
     } while (swapped);
 
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
+    clock_t end = clock(); // Finaliza el temporizador
+    double duration = double(end - start) / CLOCKS_PER_SEC; // Calcula la duración en segundos
 
+    cout << "Iteraciones: " << iteraciones << endl; // Imprime el número total de iteraciones
     cout << "Lista ordenada mediante el algoritmo de Bubble Sort." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
+    cout << "El método de ordenamiento Bubble sort se demoró " << duration << " segundos en ejecutar." << endl;
 }
+
 
 // Insertion
 void ordenarInsertionSort() {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
+    clock_t start = clock(); // Inicia el temporizador
 
     if (inicio == nullptr || inicio->siguiente == nullptr) {
         cout << "La lista está vacía o tiene un solo elemento, ya está ordenada." << endl;
         return;
     }
 
-    cout << "Lista original:" << endl;
-    mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-    cout << endl;
-
     Nodo* i = inicio->siguiente;
-    int iteracion = 1;
+    int iteraciones = 0; // Variable para mantener el número total de iteraciones
 
     while (i != nullptr) {
         string valorActual = i->dato;
@@ -209,6 +185,7 @@ void ordenarInsertionSort() {
 
         while (j != i && stoi(j->dato) < stoi(valorActual)) {
             j = j->siguiente;
+            iteraciones++; // Incrementa el número de iteraciones en cada comparación
         }
 
         // Mover los elementos mayores a la derecha
@@ -222,21 +199,16 @@ void ordenarInsertionSort() {
         // Insertar el valor actual en la posición correcta
         j->dato = valorActual;
 
-        cout << "Iteración " << iteracion++ << ": ";
-        mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-        cout << endl;
-
         i = i->siguiente;
     }
 
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
+    clock_t end = clock(); // Finaliza el temporizador
+    double duration = double(end - start) / CLOCKS_PER_SEC; // Calcula la duración en segundos
 
+    cout << "Iteraciones: " << iteraciones << endl; // Imprime el número total de iteraciones
     cout << "Lista ordenada mediante el algoritmo de Insertion Sort." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
+    cout << "El método Insertion sort se demoró " << duration << " segundos en ejecutar." << endl;
 }
-
-
 
 // mergeSort
 void merge(Nodo** inicio, Nodo* inicioA, Nodo* inicioB) {
@@ -297,7 +269,7 @@ void split(Nodo* inicio, Nodo** inicioA, Nodo** inicioB) {
     }
 }
 
-void mergeSort(Nodo** inicio) {
+void mergeSort(Nodo** inicio, int& iteraciones) {
     Nodo* head = *inicio;
     Nodo* a;
     Nodo* b;
@@ -308,28 +280,30 @@ void mergeSort(Nodo** inicio) {
 
     split(head, &a, &b);
 
-    mergeSort(&a);
-    mergeSort(&b);
+    mergeSort(&a, iteraciones);
+    mergeSort(&b, iteraciones);
 
     merge(inicio, a, b);
+    iteraciones++;
 }
 
 void ordenarMergeSort() {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
+    clock_t start = clock(); // Inicia el temporizador
 
-    mergeSort(&inicio);
+    int iteraciones = 0; // Variable para mantener el número total de iteraciones
+    mergeSort(&inicio, iteraciones);
 
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
+    clock_t end = clock(); // Finaliza el temporizador
+    double duration = double(end - start) / CLOCKS_PER_SEC; // Calcula la duración en segundos
 
+    cout << "Iteraciones: " << iteraciones << endl; // Imprime el número total de iteraciones
     cout << "Lista ordenada mediante el algoritmo de Merge Sort." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
+    cout << "El método Merge sort se demoró " << duration << " segundos en ejecutar." << endl;
 }
 
-// quickSort
-void quickSort(Nodo** inicio) {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
 
+// quickSort
+void quickSort(Nodo** inicio, int& paso) {
     if (*inicio == nullptr || (*inicio)->siguiente == nullptr)
         return;
 
@@ -349,21 +323,11 @@ void quickSort(Nodo** inicio) {
             greaterHead = current;
         }
         current = next;
+        paso++; // Incrementa el número de pasos en cada comparación
     }
 
-    // Imprimir los pasos
-    cout << "Menores al pivot: ";
-    mostrar(); // Suponiendo que mostrar() imprime los valores de los nodos
-    cout << endl;
-
-    cout << "Pivot: " << pivot->dato << endl;
-
-    cout << "Mayores al pivot: ";
-    mostrar(); // Suponiendo que mostrar() imprime los valores de los nodos
-    cout << endl;
-
-    quickSort(&lesserHead);
-    quickSort(&greaterHead);
+    quickSort(&lesserHead, paso);
+    quickSort(&greaterHead, paso);
 
     if (lesserHead == nullptr) {
         *inicio = pivot;
@@ -377,30 +341,25 @@ void quickSort(Nodo** inicio) {
     }
 
     pivot->siguiente = greaterHead;
-
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
-
-    cout << "Lista ordenada mediante el algoritmo de Quicksort." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
 }
 
 void ordenarQuickSort() {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
+    clock_t start = clock(); // Inicia el temporizador
 
-    quickSort(&inicio);
+    int paso = 0; // Variable para mantener el número de pasos
+    quickSort(&inicio, paso);
 
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
+    clock_t end = clock(); // Finaliza el temporizador
+    double duration = double(end - start) / CLOCKS_PER_SEC; // Calcula la duración en segundos
 
+    cout << "Iteraciones: " << paso << endl; // Imprime el número total de iteraciones
     cout << "Lista ordenada mediante el algoritmo de Quicksort." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
+    cout << "El método Quicksort se demoró " << duration << " segundos en ejecutar." << endl;
 }
-
 
 // bucketSort
 void bucketSort() {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
+    clock_t start = clock(); // Inicia el temporizador
 
     int maxVal = INT_MIN;
     int minVal = INT_MAX;
@@ -423,31 +382,20 @@ void bucketSort() {
         current = current->siguiente;
     }
 
-    current = inicio;
-    for (int i = 0; i < numBuckets; ++i) {
-        sort(buckets[i].begin(), buckets[i].end());
-        for (const auto& val : buckets[i]) {
-            current->dato = val;
-            current = current->siguiente;
-        }
+    int iteraciones = numBuckets; // El número de iteraciones es igual al número de buckets
 
-        // Imprimir el estado actual de la lista después de cada iteración
-        cout << "Iteración " << i + 1 << ": ";
-        mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-        cout << endl;
-    }
+    clock_t end = clock(); // Finaliza el temporizador
+    double duration = double(end - start) / CLOCKS_PER_SEC; // Calcula la duración en segundos
 
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
-
+    cout << "Iteraciones: " << iteraciones << endl; // Imprime el número total de iteraciones
     cout << "Lista ordenada mediante el algoritmo de Bucket Sort." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
+    cout << "El método Bucket sort se demoró " << duration << " segundos en ejecutar." << endl;
 }
 
 
 //shellSort
 void shellSort() {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
+    clock_t start = clock(); // Inicia el temporizador
 
     int n = 0;
     Nodo* current = inicio;
@@ -458,6 +406,7 @@ void shellSort() {
     }
 
     int gap = n / 2;
+    int iteraciones = 0; // Variable para mantener el número total de iteraciones
 
     while (gap > 0) {
         for (int i = gap; i < n; ++i) {
@@ -467,23 +416,20 @@ void shellSort() {
             while (j >= gap && stoi(getElemento(j - gap)) > stoi(temp)) {
                 setElemento(j, getElemento(j - gap));
                 j -= gap;
+                iteraciones++; // Incrementa el número de iteraciones en cada comparación
             }
             setElemento(j, temp);
-
-            // Imprimir el estado actual de la lista después de cada iteración
-            cout << "Iteración gap=" << gap << ", i=" << i << ": ";
-            mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-            cout << endl;
         }
 
         gap /= 2;
     }
 
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
+    clock_t end = clock(); // Finaliza el temporizador
+    double duration = double(end - start) / CLOCKS_PER_SEC; // Calcula la duración en segundos
 
+    cout << "Iteraciones: " << iteraciones << endl; // Imprime el número total de iteraciones
     cout << "Lista ordenada mediante el algoritmo de Shell Sort." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
+    cout << "El metodo de ordenamiento Shell sort se demoró " << duration << " segundos en ejecutar." << endl;
 }
 
 
@@ -514,7 +460,7 @@ void setElemento(int pos, string valor) {
 }
 
 void countingSort() {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
+    clock_t start = clock(); // Inicia el temporizador
 
     int minVal = INT_MAX;
     int maxVal = INT_MIN;
@@ -538,29 +484,27 @@ void countingSort() {
         current = current->siguiente;
     }
 
-    current = inicio;
-    for (int i = 0; i < range; ++i) {
-        while (count[i] > 0) {
-            current->dato = to_string(i + minVal);
-            count[i]--;
-            current = current->siguiente;
+    int iteraciones = range; // El número de iteraciones es igual al rango
 
-            // Imprimir el estado actual de la lista después de cada iteración
-            cout << "Iteración " << ": ";
-            mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-            cout << endl;
-        }
-    }
+    clock_t end = clock(); // Finaliza el temporizador
+    double duration = double(end - start) / CLOCKS_PER_SEC; // Calcula la duración en segundos
 
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
-
-    cout << "Lista ordenada mediante el algoritmo de Counting Sort." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
+    cout << "Iteraciones: " << iteraciones << endl; // Imprime el número total de iteraciones
+    cout << "El método de ordenamiento Counting Sort se demoró " << duration << " segundos en ejecutar." << endl;
 }
 
 
+
 // radixSort
+
+int getMax(int arr[], int n) {
+    int max = arr[0];
+    for (int i = 1; i < n; i++)
+        if (arr[i] > max)
+            max = arr[i];
+    return max;
+}
+
 int getSize() {
     int count = 0;
     Nodo* current = inicio;
@@ -571,73 +515,66 @@ int getSize() {
     return count;
 }
 
-void radixSort() {
-    auto start = chrono::high_resolution_clock::now(); // Inicia el temporizador
+void countingSort(int arr[], int n, int exp, int &iteraciones) {
+    int output[n]; // Arreglo de salida
+    int i, count[10] = {0};
 
-    int maxVal = INT_MIN;
-    Nodo* current = inicio;
-
-    // Encontrar el valor máximo en la lista
-    while (current != nullptr) {
-        int val = stoi(current->dato);
-        maxVal = max(maxVal, val);
-        current = current->siguiente;
+    // Almacena la cantidad de ocurrencias de cada dígito en count[]
+    for (i = 0; i < n; i++) {
+        count[(arr[i] / exp) % 10]++;
+        iteraciones++; // Incrementa el contador de iteraciones
     }
 
-    // Realizar el ordenamiento por cada dígito, comenzando desde el dígito menos significativo
-    for (int exp = 1; maxVal / exp > 0; exp *= 10) {
-        countingSortByDigit(exp);
-
-        // Imprimir el estado actual de la lista después de cada iteración
-        cout << "Después de ordenar por el dígito " << exp << ": ";
-        mostrar(); // Suponiendo que tienes una función mostrar() para mostrar la lista
-        cout << endl;
-    }
-
-    auto end = chrono::high_resolution_clock::now(); // Finaliza el temporizador
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calcula la duración
-
-    cout << "Lista ordenada mediante el algoritmo de Radix Sort." << endl;
-    cout << "La función se demoró " << duration.count() << " microsegundos en ejecutar." << endl;
-}
-
-void countingSortByDigit(int exp) {
-    int range = 10; // Dígitos de 0 a 9
-
-    // Inicializar el arreglo de conteo
-    vector<int> count(range, 0);
-
-    // Contar la frecuencia de cada dígito
-    Nodo* current = inicio;
-    while (current != nullptr) {
-        int val = (stoi(current->dato) / exp) % 10;
-        count[val]++;
-        current = current->siguiente;
-    }
-
-    // Calcular las posiciones finales de cada dígito en el arreglo ordenado
-    for (int i = 1; i < range; ++i) {
+    // Cambia count[i] para que contenga la posición real de este dígito en output[]
+    for (i = 1; i < 10; i++)
         count[i] += count[i - 1];
+
+    // Construye el arreglo de salida
+    for (i = n - 1; i >= 0; i--) {
+        output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+        count[(arr[i] / exp) % 10]--;
     }
 
-    // Construir el arreglo ordenado
-    vector<string> output(getSize());
-    current = inicio;
-    while (current != nullptr) {
-        int val = (stoi(current->dato) / exp) % 10;
-        output[count[val] - 1] = current->dato;
-        count[val]--;
-        current = current->siguiente;
-    }
-
-    // Actualizar la lista con el arreglo ordenado
-    current = inicio;
-    for (int i = 0; i < getSize(); ++i) {
-        current->dato = output[i];
-        current = current->siguiente;
-    }
+    // Copia el arreglo de salida a arr[], así arr[] contiene los números ordenados
+    for (i = 0; i < n; i++)
+        arr[i] = output[i];
 }
 
+void radixSort() {
+    clock_t start = clock(); // Inicia el temporizador
+
+    int n = getSize();
+    int arr[n];
+    Nodo* current = inicio;
+    int i = 0;
+    int iteraciones = 0; // Inicializa el contador de iteraciones
+
+    // Llena el arreglo con los elementos de la lista
+    while (current != nullptr) {
+        arr[i++] = stoi(current->dato);
+        current = current->siguiente;
+    }
+
+    // Encuentra el valor máximo para saber cuántos dígitos tiene
+    int m = getMax(arr, n);
+
+    // Aplica el counting sort para cada dígito. En lugar de pasar exp, pasamos 10^i donde i es el dígito actual
+    for (int exp = 1; m / exp > 0; exp *= 10)
+        countingSort(arr, n, exp, iteraciones);
+
+    // Actualiza la lista con los valores ordenados
+    current = inicio;
+    for (int i = 0; i < n; ++i) {
+        current->dato = to_string(arr[i]);
+        current = current->siguiente;
+    }
+
+    clock_t end = clock(); // Finaliza el temporizador
+    double duration = double(end - start) / CLOCKS_PER_SEC; // Calcula la duración en segundos
+
+    cout << "Número total de iteraciones: " << iteraciones << endl; // Imprime el número total de iteraciones
+    cout << "El método de ordenamiento Radix Sort se demoró " << duration << " segundos en ejecutar." << endl;
+}
 
 };
 
@@ -760,5 +697,3 @@ int main() {
 
     return 0;
 }
-Codigo structura de datos.txt
-Mostrando Codigo structura de datos.txt.
