@@ -51,8 +51,92 @@ Después de insertar "11", realiza Insertar en el nodo con valor "11".
 
 Después de insertar "26", realiza Insertar en el nodo con valor "26".
 
+Los grafos son estructuras matemáticas utilizadas para modelar relaciones entre objetos. Un grafo consiste en un conjunto de nodos (también llamados vértices) y un conjunto de aristas (también llamadas arcos o enlaces) que conectan pares de nodos. Los grafos se utilizan en una variedad de campos, incluyendo informática, ingeniería, biología, ciencias sociales y más, para representar y analizar sistemas complejos de relaciones.
+
+Componentes de un Grafo
+Nodos (Vértices): Los puntos fundamentales de un grafo que representan entidades u objetos.
+Aristas (Arcos o Enlaces): Las líneas que conectan pares de nodos y representan las relaciones entre ellos.
+Tipos de Grafos
+Grafo Dirigido (Digrafo): Las aristas tienen una dirección, es decir, van de un nodo a otro específico. Se representan comúnmente con flechas.
+
+Ejemplo: Un grafo que modela un sistema de navegación GPS, donde las carreteras tienen direcciones específicas.
+Grafo No Dirigido: Las aristas no tienen una dirección, es decir, la relación es bidireccional.
+
+Ejemplo: Un grafo que representa las conexiones entre amigos en una red social, donde la amistad es mutua.
+Grafo Ponderado: Las aristas tienen un peso asociado que representa el costo, la distancia, o alguna otra medida de la relación.
+
+Ejemplo: Un grafo que modela un mapa de carreteras donde las aristas representan distancias entre ciudades.
+Grafo No Ponderado: Las aristas no tienen peso y simplemente representan la presencia o ausencia de una relación.
+
+![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/141601959/8b4c63a8-eea6-421d-92fd-aef5d199ceae)
+![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/141601959/73846080-7549-4b29-8f96-1190b09f0155)
 
 
+Funcionalidades
+Árboles Binarios de Búsqueda Autobalanceados
+Inserción de nodos en un ABB:
+
+Permite al usuario ingresar una lista de nodos para construir un ABB.
+Visualización del ABB inicial:
+
+Muestra el ABB ingresado y verifica si es un AVL.
+Conversión a AVL:
+
+Convierte el ABB inicial a un Árbol AVL y lo visualiza.
+Conversión a Árbol Rojo-Negro:
+
+Convierte el ABB inicial a un Árbol Rojo-Negro y lo visualiza.
+Grafos
+Ingreso de la matriz de adyacencias:
+
+Permite al usuario ingresar una matriz de adyacencias desde un archivo.
+Visualización del grafo inicial:
+
+Genera un archivo DOT y una imagen PNG para visualizar el grafo.
+Algoritmos de caminos más cortos:
+
+Dijkstra: Encuentra los caminos más cortos desde un nodo inicial.
+Floyd-Warshall: Encuentra los caminos más cortos entre todos los pares de nodos.
+Algoritmos de árboles de expansión mínima:
+
+Kruskal: Encuentra el árbol de expansión mínima usando el algoritmo de Kruskal.
+Prim: Encuentra el árbol de expansión mínima usando el algoritmo de Prim.
+
+Archivos DOT y Visualización
+El programa genera archivos DOT para visualizar los árboles y grafos. Estos archivos se pueden convertir a imágenes PNG usando Graphviz:
+dot -Tpng archivo.dot -o archivo.png
+
+Estructura del Proyecto
+|-- main.cpp            # Archivo principal con la implementación del menú y las funciones.
+|-- graph.h             # Definiciones de estructuras y funciones relacionadas con grafos.
+|-- tree.h              # Definiciones de estructuras y funciones relacionadas con árboles.
+|-- dijkstra.dot        # Archivo DOT generado por el algoritmo de Dijkstra.
+|-- floyd_warshall.dot  # Archivo DOT generado por el algoritmo de Floyd-Warshall.
+|-- kruskal.dot         # Archivo DOT generado por el algoritmo de Kruskal.
+|-- prim.dot            # Archivo DOT generado por el algoritmo de Prim.
+|-- bst_tree.dot        # Archivo DOT del ABB inicial.
+|-- avl_tree.dot        # Archivo DOT del árbol AVL.
+|-- rb_tree.dot         # Archivo DOT del árbol Rojo-Negro.
+|-- graph.png           # Imagen PNG del grafo.
+|-- dijkstra.png        # Imagen PNG del resultado de Dijkstra.
+|-- floyd_warshall.png  # Imagen PNG del resultado de Floyd-Warshall.
+|-- kruskal.png         # Imagen PNG del resultado de Kruskal.
+|-- prim.png            # Imagen PNG del resultado de Prim.
+|-- bst_tree.png        # Imagen PNG del ABB inicial.
+|-- avl_tree.png        # Imagen PNG del árbol AVL.
+|-- rb_tree.png         # Imagen PNG del árbol Rojo-Negro.
+
+Asegúrate de tener Graphviz instalado para generar las imágenes PNG a partir de los archivos DOT:
+
+sudo apt-get install graphviz
+![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/141601959/eed223b6-7f5f-4202-a2a6-19142691ec10)
+
+ una ves instalado mire bien la instalacion y dele a esta opcion
+ ![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/141601959/2d6612e7-5731-4fb7-8c05-b9fdb07c0905)
+
+
+para confirmar el la intalacion aplique este comando 
+![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/141601959/8aa4215a-5697-45db-abc1-9153cf3a461b)
 
 
 
