@@ -1,5 +1,6 @@
 ARBOLES EJEMPLO: Un arbol NO AVL que ingresa el usuario y se balancea usando el case b del submenu de arboles y luego, se balancea de manera RB
 
+hola
 
 
 ![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/159094418/0a4bfc88-d263-4fb4-b5dc-eb2667359450)
