@@ -1,7 +1,50 @@
+Árboles
+Un árbol es una estructura de datos jerárquica que consiste en nodos conectados por aristas. Los árboles se utilizan para representar estructuras en las que los elementos tienen una relación jerárquica, como los sistemas de archivos, las organizaciones empresariales, las expresiones matemáticas, etc.
+
+Componentes de un Árbol
+Nodo: La unidad básica de un árbol. Cada nodo puede tener un valor o dato y referencias a otros nodos (sus hijos).
+Raíz: El nodo superior del árbol, el cual no tiene padre.
+Hijo: Un nodo directamente descendiente de otro nodo.
+Padre: Un nodo que tiene uno o más hijos.
+Hoja: Un nodo que no tiene hijos.
+Altura: La longitud del camino más largo desde la raíz hasta una hoja.
+Subárbol: Un árbol que es parte de un árbol más grande.
+
+Implementación de un Árbol Binario en C++
+Un árbol binario es un tipo de árbol en el que cada nodo tiene como máximo dos hijos, denominados hijo izquierdo y hijo derecho.
+
+aqui un resumen de lo que se encarga el codigo 
+Tipos de Estructuras de Árbol:
+
+Árbol Binario de Búsqueda (BST): Un árbol donde cada nodo tiene un valor, y para cualquier nodo dado, todos los valores en el subárbol izquierdo son menores y todos los valores en el subárbol derecho son mayores.
+Árbol AVL: Un tipo especial de árbol binario de búsqueda que está balanceado, lo que significa que para cada nodo, la diferencia de altura entre el subárbol izquierdo y derecho no puede ser mayor que 1.
+Árbol Rojo-Negro: Otro tipo de árbol binario de búsqueda que se auto-balancea, donde cada nodo tiene un color (rojo o negro) y sigue ciertas reglas para asegurar el balance.
+Funciones para Trabajar con Árboles Binarios de Búsqueda (BST):
+
+Altura: Calcula la altura de un árbol.
+Verificar si es AVL: Comprueba si un árbol binario de búsqueda es también un árbol AVL.
+Rotaciones: Funciones para rotar nodos a la derecha o izquierda, utilizadas para balancear el árbol AVL.
+Balancear el Árbol AVL: Inserta nodos en un árbol AVL de manera que el árbol se mantenga balanceado.
+Insertar en un BST: Inserta un nodo en el árbol BST siguiendo las reglas básicas (menores a la izquierda, mayores a la derecha).
+
+Convertir un BST en un AVL: Recoge todos los nodos de un BST y los re-inserta en un árbol AVL para balancearlo.
+
+Funciones para Trabajar con Árboles Rojo-Negro (RB):
+
+Rotaciones: Funciones para rotar nodos a la derecha o izquierda, utilizadas para balancear el árbol RB.
+Balancear después de la Inserción: Asegura que el árbol RB se mantenga balanceado y siga las reglas de color después de insertar un nuevo nodo.
+Insertar en un Árbol Rojo-Negro: Inserta un nodo en el árbol RB y luego llama a la función de balanceo para mantener las propiedades del árbol RB.
+Proceso General:
+
+Insertar Nodos en un BST: Se puede insertar nodos en un BST de manera directa.
+Convertir el BST a un AVL: Después de tener un BST, se puede convertir a un AVL reinsertando los nodos de manera que se mantenga el balance.
+Insertar Nodos en un RB: Similar a la inserción en un BST, pero con balanceo adicional basado en las reglas de color y rotaciones para mantener el balance del árbol.
+
+Aquí te dejo un ejemplo básico de implementación de un árbol binario en C++.
+
 ARBOLES EJEMPLO: Un arbol NO AVL que ingresa el usuario y se balancea usando el case b del submenu de arboles y luego, se balancea de manera RB
 
 hola
-
 
 ![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/159094418/0a4bfc88-d263-4fb4-b5dc-eb2667359450)
 ![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/159094418/e96a4637-129a-4a80-8298-9b7e0bf8aeab)
