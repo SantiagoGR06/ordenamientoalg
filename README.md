@@ -44,7 +44,7 @@ Aquí te dejo un ejemplo básico de implementación de un árbol binario en C++.
 
 ARBOLES EJEMPLO: Un arbol NO AVL que ingresa el usuario y se balancea usando el case b del submenu de arboles y luego, se balancea de manera RB
 
-hola
+
 
 ![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/159094418/0a4bfc88-d263-4fb4-b5dc-eb2667359450)
 ![image](https://github.com/SantiagoGR06/proyectofinalestructura/assets/159094418/e96a4637-129a-4a80-8298-9b7e0bf8aeab)
