@@ -40,7 +40,7 @@ Insertar Nodos en un BST: Se puede insertar nodos en un BST de manera directa.
 Convertir el BST a un AVL: Después de tener un BST, se puede convertir a un AVL reinsertando los nodos de manera que se mantenga el balance.
 Insertar Nodos en un RB: Similar a la inserción en un BST, pero con balanceo adicional basado en las reglas de color y rotaciones para mantener el balance del árbol.
 
-Aquí te dejo un ejemplo básico de implementación de un árbol binario en C++.
+En esta sección mostraremos un ejemplo básico de implementación de un árbol binario en C++.
 
 ARBOLES EJEMPLO: Un arbol NO AVL que ingresa el usuario y se balancea usando el case b del submenu de arboles y luego, se balancea de manera RB
 
